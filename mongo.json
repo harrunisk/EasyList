@@ -1,0 +1,1 @@
+db.EasyList.insert({'siraNo' : 0,'dersKodu' : 'BSM 103','dersAdi' : 'Programlamaya Giriş','dersIcerik' : "Güzel bir dersimizdir."})
