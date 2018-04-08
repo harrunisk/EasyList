@@ -1,0 +1,71 @@
+extends layout
+
+block content
+
+        #userList.container
+
+            h2 B131210017 Ağ Programlama Ödev1
+            table.table
+                thead
+                    tr
+                        th Sıra No
+                        th Ders Adı
+                        th Ders Kodu
+                tbody
+            form.hidden
+                input#siraNo.form-control
+            form
+                .form-group.row
+                    label.col-sm-2.col-form-label Dersin Kodu:
+                    .col-sm-10
+                        input#dersKodu.form-control
+            form
+                .form-group.row
+                    label.col-sm-2.col-form-label Dersin Adı:
+                    .col-sm-10
+                        input#dersAdi.form-control
+            form
+                .form-group.row
+                    label.col-sm-2.col-form-label Dersin İçeriği:
+                    .col-sm-10
+                        input#dersIcerik.form-control
+
+
+            .row
+                .col-sm-4
+                .col-sm-4
+                    button#xmlGoster.btn.btn-primary(type='button') XML&nbsp &nbspGöster
+                .col-sm-4
+                    button#jsonGoster.btn.btn-primary(type='button')  JSON Göster
+            .form-group
+                label(for='comment') Kodlanmış veri:
+                textarea#comment.form-control(rows='5')
+
+            h2 Add Lesson
+            #addLesson
+                fieldset
+                    form
+                        .form-group.row
+                            label.col-sm-2.col-form-label Sıra No:
+                            .col-sm-10
+                                input#inputsiraNo.form-control
+                    form
+                        .form-group.row
+                            label.col-sm-2.col-form-label Dersin Kodu:
+                            .col-sm-10
+                                input#inputdersKodu.form-control
+                    form
+                        .form-group.row
+                            label.col-sm-2.col-form-label Dersin Adı:
+                            .col-sm-10
+                                input#inputdersAdi.form-control
+                    form
+                        .form-group.row
+                            label.col-sm-2.col-form-label Dersin İçeriği:
+                            .col-sm-10
+                                input#inputdersIcerik.form-control
+                    .row
+                        .col-sm-4
+                        .col-sm-4
+                        .col-sm-4
+                            button#btnAddLesson.btn.btn-primary(type='button')  Ders Ekle
