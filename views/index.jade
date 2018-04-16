@@ -2,70 +2,71 @@ extends layout
 
 block content
 
-        #userList.container
+        #lessonList.container
 
-            h2 B131210017 Ağ Programlama Ödev1
+            br
             table.table
                 thead
                     tr
-                        th Sıra No
-                        th Ders Adı
-                        th Ders Kodu
+                        th Sequence Number
+                        th Course Name
+                        th Course Code
                 tbody
             form.hidden
-                input#siraNo.form-control
+                input#sequenceNumber.form-control
             form
                 .form-group.row
-                    label.col-sm-2.col-form-label Dersin Kodu:
+                    label.col-sm-2.col-form-label Course Code:
                     .col-sm-10
-                        input#dersKodu.form-control
+                        input#courseCode.form-control
             form
                 .form-group.row
-                    label.col-sm-2.col-form-label Dersin Adı:
+                    label.col-sm-2.col-form-label Course Name:
                     .col-sm-10
-                        input#dersAdi.form-control
+                        input#courseName.form-control
             form
                 .form-group.row
-                    label.col-sm-2.col-form-label Dersin İçeriği:
+                    label.col-sm-2.col-form-label Course Content:
                     .col-sm-10
-                        input#dersIcerik.form-control
+                        input#courseContent.form-control
 
 
             .row
                 .col-sm-4
                 .col-sm-4
-                    button#xmlGoster.btn.btn-primary(type='button') XML&nbsp &nbspGöster
+                    button#xmlFormat.btn.btn-primary(type='button') XML&nbsp &nbspFormat
                 .col-sm-4
-                    button#jsonGoster.btn.btn-primary(type='button')  JSON Göster
+                    button#jsonFormat.btn.btn-primary(type='button')  JSON Format
             .form-group
-                label(for='comment') Kodlanmış veri:
+                label(for='comment') Encoded Data:
                 textarea#comment.form-control(rows='5')
-
-            h2 Add Lesson
+            br
+            h2(style='text-align: center') Add Lesson
+            br
             #addLesson
                 fieldset
                     form
                         .form-group.row
-                            label.col-sm-2.col-form-label Sıra No:
+                            label.col-sm-2.col-form-label Sequence Number:
                             .col-sm-10
-                                input#inputsiraNo.form-control
+                                input#inputsequenceNumber.form-control
                     form
                         .form-group.row
-                            label.col-sm-2.col-form-label Dersin Kodu:
+                            label.col-sm-2.col-form-label Course Code:
                             .col-sm-10
-                                input#inputdersKodu.form-control
+                                input#inputcourseCode.form-control
                     form
                         .form-group.row
-                            label.col-sm-2.col-form-label Dersin Adı:
+                            label.col-sm-2.col-form-label Course Name:
                             .col-sm-10
-                                input#inputdersAdi.form-control
+                                input#inputcourseName.form-control
                     form
                         .form-group.row
-                            label.col-sm-2.col-form-label Dersin İçeriği:
+                            label.col-sm-2.col-form-label Course Content:
                             .col-sm-10
-                                input#inputdersIcerik.form-control
+                                input#inputcourseContent.form-control
                     .row
                         .col-sm-4
                         .col-sm-4
                         .col-sm-4
-                            button#btnAddLesson.btn.btn-primary(type='button')  Ders Ekle
+                            button#btnAddLesson.btn.btn-primary(type='button')  Add Lesson
