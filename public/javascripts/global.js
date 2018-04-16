@@ -1,4 +1,4 @@
-// Userlist data array for filling in info box
+// lesson list data array for filling in info box
 var lessonListData = [];
 var lastObject;
 var temp=0;
@@ -12,24 +12,23 @@ $(document).ready(function() {
 
     //github initializer
 
-    // Populate the user table on initial page load
+    // Populate the lesson table on initial page load
     populateTable();
 
-    $(window).on("load",showUserInfoWhenStart)
+    $(window).on("load",showLessonInfoWhenStart)
 
-    // Username link click
-    $('#userList table tbody').on('click', 'td a.linkshowuser', showUserInfo);
+    // Lesson link click
+    $('#lessonList table tbody').on('click', 'td a.linkshowLesson', showLessonInfo);
     $('#btnAddLesson').on('click',addLesson);
-    $('#userList table tbody').on('click', 'td a.linkdeleteuser', deleteLesson);
-    $('#userList table tbody').on('click', 'td a.linkupdateuser', updateLesson);
-    $('#jsonGoster').on('click',showAsJson);
-    $('#xmlGoster').on('click',showAsXml);
+    $('#lessonList table tbody').on('click', 'td a.linkdeletelesson', deleteLesson);
+    $('#jsonFormat').on('click',showAsJson);
+    $('#xmlFormat').on('click',showAsXml);
 
 
-    //güncellenecek sütundan çıkılınca
-    $('#dersKodu').on('keyup',updateLesson);
-    $('#dersAdi').on('keyup',updateLesson);
-    $('#dersIcerik').on('keyup',updateLesson);
+    //keyup functions
+    $('#courseCode').on('keyup',updateLesson);
+    $('#courseName').on('keyup',updateLesson);
+    $('#courseContent').on('keyup',updateLesson);
 
 
 
@@ -47,8 +46,8 @@ function populateTable() {
     $.getJSON( '/lessons/lessonList', function( data ) {
 
         lessonListData = data;
-        if(temp==0)
-        { object=lessonListData[2];
+        if(temp==0 || lessonListData.length==1)
+        { object=lessonListData[0];
         temp++;}
         else
         { object=lastObject;}
@@ -56,32 +55,31 @@ function populateTable() {
         $.each(data, function(){
             if(this._id==object._id) {
                 tableContent += '<tr class="success">';
-                //tableContent += '<td><a href="#" class="linkshowuser" rel="' + this.siraNo + '">' + this.dersKodu + '</a></td>';
-                tableContent += '<td>' + this.siraNo + '</td>';
-                tableContent += '<td><a href="#" class="linkshowuser" rel="' + this.dersKodu + '">' + this.dersKodu + '</a></td>';
-                //tableContent += '<td>' + this.dersKodu + '</td>';
-                tableContent += '<td>' + this.dersAdi + '</td>';
-                tableContent += '<td><a href="#" class="linkdeleteuser" rel="' + this._id + '">Sil</a></td>';
+                //tableContent += '<td><a href="#" class="linkshowLesson" rel="' + this.sequenceNumber + '">' + this.courseCode + '</a></td>';
+                tableContent += '<td>' + this.sequenceNumber + '</td>';
+                tableContent += '<td><a href="#" class="linkshowLesson" rel="' + this.courseCode + '">' + this.courseCode + '</a></td>';
+                //tableContent += '<td>' + this.courseCode + '</td>';
+                tableContent += '<td>' + this.courseName + '</td>';
+                tableContent += '<td><a href="#" class="linkdeletelesson" rel="' + this._id + '">Delete Course</a></td>';
                 tableContent += '</tr>';
                 lastObject=this;
 
             }
             else{
                 tableContent += '<tr">';
-                //tableContent += '<td><a href="#" class="linkshowuser" rel="' + this.siraNo + '">' + this.dersKodu + '</a></td>';
-                tableContent += '<td>' + this.siraNo + '</td>';
-                tableContent += '<td><a href="#" class="linkshowuser" rel="' + this.dersKodu + '">' + this.dersKodu + '</a></td>';
-                //tableContent += '<td>' + this.dersKodu + '</td>';
-                tableContent += '<td>' + this.dersAdi + '</td>';
-                tableContent += '<td><a href="#" class="linkdeleteuser" rel="' + this._id + '">Sil</a></td>';
-
+                //tableContent += '<td><a href="#" class="linkshowLesson" rel="' + this.sequenceNumber + '">' + this.courseCode + '</a></td>';
+                tableContent += '<td>' + this.sequenceNumber + '</td>';
+                tableContent += '<td><a href="#" class="linkshowLesson" rel="' + this.courseCode + '">' + this.courseCode + '</a></td>';
+                //tableContent += '<td>' + this.courseCode + '</td>';
+                tableContent += '<td>' + this.courseName + '</td>';
+                tableContent += '<td><a href="#" class="linkdeletelesson" rel="' + this._id + '">Delete Course</a></td>';
                 tableContent += '</tr>';
             }
         });
 
         // Inject the whole content string into our existing HTML table
-        //userlist isimli elamanın tablosunun tbody(table body) kısmını doldurmaya yarayan jquery kodu.
-        $('#userList table tbody').html(tableContent);
+        //lessonlist isimli elamanın tablosunun tbody(table body) kısmını doldurmaya yarayan jquery kodu.
+        $('#lessonList table tbody').html(tableContent);
         jsonNumerator++;
         if(selector==1)
         {showAsJsonWithoutEvent();}
@@ -93,28 +91,28 @@ function populateTable() {
     });
 };
 
-// Show User Info
-function showUserInfo(event) {
+// Show Lesson Info
+function showLessonInfo(event) {
 
     // Prevent Link from Firing
     event.preventDefault();
 
-    // Retrieve username from link rel attribute
+    // Retrieve lesson from link rel attribute
     var thisLesson = $(this).attr('rel');
 
     // Get Index of object based on id value
-    var arrayPosition = lessonListData.map(function(arrayItem) { return arrayItem.dersKodu; }).indexOf(thisLesson);
+    var arrayPosition = lessonListData.map(function(arrayItem) { return arrayItem.courseCode; }).indexOf(thisLesson);
 
 
-    // Get our User Object
+    // Get our Lesson Object
     var thisLessonObject = lessonListData[arrayPosition];
     lastObject=thisLessonObject;
 
     //Populate Info Box
-    $('#siraNo').val(thisLessonObject.siraNo);
-    $('#dersKodu').val(thisLessonObject.dersKodu);
-    $('#dersAdi').val(thisLessonObject.dersAdi);
-    $('#dersIcerik').val(thisLessonObject.dersIcerik);
+    $('#sequenceNumber').val(thisLessonObject.sequenceNumber);
+    $('#courseCode').val(thisLessonObject.courseCode);
+    $('#courseName').val(thisLessonObject.courseName);
+    $('#courseContent').val(thisLessonObject.courseContent);
     populateTable();
     if($('#comment').val()!=""){
         if(selector==1)
@@ -127,26 +125,27 @@ function showUserInfo(event) {
     }
 
 };
-function showUserInfoWhenStart() {
+function showLessonInfoWhenStart() {
 
     // Prevent Link from Firing
 
 
 
-    // Get Index of object based on id value
-    var arrayPosition =2
 
+    if(lessonListData.length!=0) {
 
+        // Get Index of object based on id value
+        var arrayPosition = 0
+        // Get our lesson Object
+        var thisLessonObject = lessonListData[arrayPosition];
+        lastObject = thisLessonObject;
 
-    // Get our User Object
-    var thisLessonObject = lessonListData[arrayPosition];
-    lastObject= thisLessonObject;
-
-    //Populate Info Box
-    $('#siraNo').val(thisLessonObject.siraNo);
-    $('#dersKodu').val(thisLessonObject.dersKodu);
-    $('#dersAdi').val(thisLessonObject.dersAdi);
-    $('#dersIcerik').val(thisLessonObject.dersIcerik);
+        //Populate Info Box
+        $('#sequenceNumber').val(thisLessonObject.sequenceNumber);
+        $('#courseCode').val(thisLessonObject.courseCode);
+        $('#courseName').val(thisLessonObject.courseName);
+        $('#courseContent').val(thisLessonObject.courseContent);
+    }
 
 };
 
@@ -163,10 +162,10 @@ function updateLesson (event) {
 
     if(errorCount>0){
         var updatedLesson={
-            'siraNo':$('#siraNo').val(),
-            'dersKodu':$('#dersKodu').val(),
-            'dersAdi':$('#dersAdi').val(),
-            'dersIcerik':$('#dersIcerik').val()
+            'sequenceNumber':$('#sequenceNumber').val(),
+            'courseCode':$('#courseCode').val(),
+            'courseName':$('#courseName').val(),
+            'courseContent':$('#courseContent').val()
 
         }
 
@@ -230,10 +229,10 @@ function addLesson (event) {
 
     if(errorCount===0){
         var newLesson={
-            'siraNo':$('#addLesson fieldset form input#inputsiraNo').val(),
-            'dersKodu':$('#addLesson fieldset form input#inputdersKodu').val(),
-            'dersAdi':$('#addLesson fieldset form input#inputdersAdi').val(),
-            'dersIcerik':$('#addLesson fieldset form input#inputdersIcerik').val()
+            'sequenceNumber':$('#addLesson fieldset form input#inputsequenceNumber').val(),
+            'courseCode':$('#addLesson fieldset form input#inputcourseCode').val(),
+            'courseName':$('#addLesson fieldset form input#inputcourseName').val(),
+            'courseContent':$('#addLesson fieldset form input#inputcourseContent').val()
 
         }
 
@@ -250,6 +249,14 @@ function addLesson (event) {
             if(response.msg===''){
 
                 $('#addLesson fieldset form input').val();
+
+                    $('#addLesson fieldset form input#inputsequenceNumber').val(''),
+                    $('#addLesson fieldset form input#inputcourseCode').val(''),
+                    $('#addLesson fieldset form input#inputcourseName').val(''),
+                    $('#addLesson fieldset form input#inputcourseContent').val('')
+
+
+
 
 
                 populateTable();
@@ -287,7 +294,7 @@ function deleteLesson(event) {
     event.preventDefault();
 
 
-    var confirmation=confirm('Silmek İstediğinize Emin misiniz?');
+    var confirmation=confirm('Are you sure you want to delete?');
 
     if(confirmation===true){
         $.ajax({
@@ -297,6 +304,21 @@ function deleteLesson(event) {
         }).done(function (response) {
 
             if(response.msg===''){
+
+                if (lessonListData.length==1)
+                {
+                    $('#sequenceNumber').val(''),
+                    $('#courseCode').val(''),
+                    $('#courseName').val(''),
+                    $('#courseContent').val('')
+
+
+
+                }
+                else{
+
+                    showLessonInfoWhenStart()
+                }
 
             }
             else
@@ -335,10 +357,10 @@ function showAsJson(event){
     }
     else {
         var JsonData={
-            'siraNo':$('#siraNo').val(),
-            'dersKodu':$('#dersKodu').val(),
-            'dersAdi':$('#dersAdi').val(),
-            'dersIcerik':$('#dersIcerik').val()
+            'sequenceNumber':$('#sequenceNumber').val(),
+            'courseCode':$('#courseCode').val(),
+            'courseName':$('#courseName').val(),
+            'courseContent':$('#courseContent').val()
         }
 
 
@@ -357,10 +379,10 @@ function showAsJsonWithoutEvent(){
     }
     else {
         var JsonData={
-            'siraNo':$('#siraNo').val(),
-            'dersKodu':$('#dersKodu').val(),
-            'dersAdi':$('#dersAdi').val(),
-            'dersIcerik':$('#dersIcerik').val()
+            'sequenceNumber':$('#sequenceNumber').val(),
+            'courseCode':$('#courseCode').val(),
+            'courseName':$('#courseName').val(),
+            'courseContent':$('#courseContent').val()
         }
 
 
@@ -384,10 +406,10 @@ function showAsXml(event){
 
         var x2js = new X2JS();
         var JsonData = {
-            'siraNo': $('#siraNo').val(),
-            'dersKodu': $('#dersKodu').val(),
-            'dersAdi': $('#dersAdi').val(),
-            'dersIcerik': $('#dersIcerik').val()
+            'sequenceNumber': $('#sequenceNumber').val(),
+            'courseCode': $('#courseCode').val(),
+            'courseName': $('#courseName').val(),
+            'courseContent': $('#courseContent').val()
         }
         var xmlStr = x2js.json2xml_str(JsonData);
         $('#comment').val(xmlStr);
@@ -405,10 +427,10 @@ function showAsXmlWithoutEvent(){
 
         var x2js= new X2JS();
         var JsonData={
-            'siraNo':$('#siraNo').val(),
-            'dersKodu':$('#dersKodu').val(),
-            'dersAdi':$('#dersAdi').val(),
-            'dersIcerik':$('#dersIcerik').val()
+            'sequenceNumber':$('#sequenceNumber').val(),
+            'courseCode':$('#courseCode').val(),
+            'courseName':$('#courseName').val(),
+            'courseContent':$('#courseContent').val()
         }
         var xmlStr=x2js.json2xml_str(JsonData);
         $('#comment').val(xmlStr);
