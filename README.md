@@ -24,7 +24,7 @@ sudo systemctl start mongod
 ~~~
 5.Start the application
 ~~~
-node app.js
+npm start
 ~~~
 Now the app should be working on localhost:3000.
 
