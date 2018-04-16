@@ -2,7 +2,7 @@
 This application is built by using Nodejs, Express, MongoDB, Jade.
 ![Work](https://raw.githubusercontent.com/harrunisk/EasyList/master/Image.png)
 
-#Installation
+# Installation
 Make sure you have Nodejs, npm and MongoDB.
 1.Clone or download the repository 
 ~~~
