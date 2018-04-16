@@ -13,12 +13,16 @@ git clone https://github.com/harrunisk/EasyList.git
 ~~~
 cd EasyList
 ~~~
-3.Start MongoDb
+3.Install Dependencies
+~~~
+npm install
+~~~
+4.Start MongoDB
 For linux
 ~~~
 sudo systemctl start mongod
 ~~~
-4.Start the application
+5.Start the application
 ~~~
 node app.js
 ~~~
