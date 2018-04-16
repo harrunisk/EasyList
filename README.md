@@ -17,7 +17,7 @@ cd EasyList
 ~~~
 npm install
 ~~~
-4.Start MongoDB
+4.Start MongoDB  
 For linux
 ~~~
 sudo systemctl start mongod
