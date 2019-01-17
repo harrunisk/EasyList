@@ -11,7 +11,6 @@ $(document).ready(function() {
 
 
     //github initializer
-
     // Populate the lesson table on initial page load
     populateTable();
 
@@ -128,12 +127,7 @@ function showLessonInfo(event) {
 function showLessonInfoWhenStart() {
 
     // Prevent Link from Firing
-
-
-
-
     if(lessonListData.length!=0) {
-
         // Get Index of object based on id value
         var arrayPosition = 0
         // Get our lesson Object
@@ -146,7 +140,6 @@ function showLessonInfoWhenStart() {
         $('#courseName').val(thisLessonObject.courseName);
         $('#courseContent').val(thisLessonObject.courseContent);
     }
-
 };
 
 
@@ -166,7 +159,6 @@ function updateLesson (event) {
             'courseCode':$('#courseCode').val(),
             'courseName':$('#courseName').val(),
             'courseContent':$('#courseContent').val()
-
         }
 
         $.ajax({
@@ -174,11 +166,7 @@ function updateLesson (event) {
             data:   updatedLesson,
             url:    '/lessons/updatelesson/'+ lastObject._id,
             dataType:   'JSON'
-
-
         }).done(function (response) {
-
-
         if(response.msg===''){
 
             $('#addLesson fieldset form input').val();
@@ -188,20 +176,13 @@ function updateLesson (event) {
                 else if (selector==2){
                     showAsXmlWithoutEvent();
                 }
-
             }
             populateTable();
-
-
         }
 
 
         else{
-
             alert('Error: ' +response.msg);
-
-
-
         }
         
     });
@@ -214,13 +195,11 @@ function updateLesson (event) {
         // If errorCount is more than 0, error out
         alert('Please fill in all fields');
         return false;
-
     }
     
 }
 function addLesson (event) {
     event.preventDefault();
-
     var errorCount=0;
     $('#addLesson fieldset form input').each(function(index, val){
         if($(this).val()=== '') {errorCount++;}
@@ -241,11 +220,7 @@ function addLesson (event) {
             data:   newLesson,
             url:    '/lessons/addlesson',
             dataType:   'JSON'
-
-
         }).done(function (response) {
-
-
             if(response.msg===''){
 
                 $('#addLesson fieldset form input').val();
@@ -254,23 +229,12 @@ function addLesson (event) {
                     $('#addLesson fieldset form input#inputcourseCode').val(''),
                     $('#addLesson fieldset form input#inputcourseName').val(''),
                     $('#addLesson fieldset form input#inputcourseContent').val('')
-
-
-
-
-
-                populateTable();
-
-
+                    populateTable();
             }
 
 
             else{
-
                 alert('Error: ' +response.msg);
-
-
-
             }
 
         });
@@ -279,44 +243,31 @@ function addLesson (event) {
 
     }
     else {
-
         // If errorCount is more than 0, error out
         alert('Please fill in all fields');
         return false;
-
     }
 
 }
 
 
 function deleteLesson(event) {
-
     event.preventDefault();
-
-
     var confirmation=confirm('Are you sure you want to delete?');
-
     if(confirmation===true){
         $.ajax({
             type:   'DELETE',
             url:    '/lessons/deletelesson/' + $(this).attr('rel')
-
         }).done(function (response) {
-
             if(response.msg===''){
-
                 if (lessonListData.length==1)
                 {
                     $('#sequenceNumber').val(''),
                     $('#courseCode').val(''),
                     $('#courseName').val(''),
                     $('#courseContent').val('')
-
-
-
                 }
                 else{
-
                     showLessonInfoWhenStart()
                 }
 
@@ -331,27 +282,17 @@ function deleteLesson(event) {
             
         });
 
-
-
     }
-
-
     else {
-
         return false;
-
-
-
     }
 
 
     
 };
 function showAsJson(event){
-
     event.preventDefault();
     selector=1;
-
     if (jsonNumerator==0){
         jsonNumerator++;
     }
@@ -362,9 +303,6 @@ function showAsJson(event){
             'courseName':$('#courseName').val(),
             'courseContent':$('#courseContent').val()
         }
-
-
-
         var str = JSON.stringify(JsonData, 2, null);
         $('#comment').val(str);
     }
@@ -372,8 +310,6 @@ function showAsJson(event){
 
 }
 function showAsJsonWithoutEvent(){
-
-
     if (jsonNumerator==0){
         jsonNumerator++;
     }
@@ -384,9 +320,6 @@ function showAsJsonWithoutEvent(){
             'courseName':$('#courseName').val(),
             'courseContent':$('#courseContent').val()
         }
-
-
-
         var str = JSON.stringify(JsonData, 2, null);
         $('#comment').val(str);
     }
@@ -395,15 +328,12 @@ function showAsJsonWithoutEvent(){
 
 }
 function showAsXml(event){
-
     event.preventDefault();
-
     selector=2;
     if (jsonNumerator==0){
         jsonNumerator++;
     }
     else {
-
         var x2js = new X2JS();
         var JsonData = {
             'sequenceNumber': $('#sequenceNumber').val(),
@@ -413,18 +343,14 @@ function showAsXml(event){
         }
         var xmlStr = x2js.json2xml_str(JsonData);
         $('#comment').val(xmlStr);
-
-
     }
 }
 
 function showAsXmlWithoutEvent(){
-
     if (jsonNumerator==0){
         jsonNumerator++;
     }
     else {
-
         var x2js= new X2JS();
         var JsonData={
             'sequenceNumber':$('#sequenceNumber').val(),
@@ -435,9 +361,4 @@ function showAsXmlWithoutEvent(){
         var xmlStr=x2js.json2xml_str(JsonData);
         $('#comment').val(xmlStr);
     }
-
-
-
-
-
 }
