@@ -10,7 +10,6 @@ var selector=0;
 $(document).ready(function() {
 
 
-    //github initializer
     // Populate the lesson table on initial page load
     populateTable();
 
@@ -77,7 +76,6 @@ function populateTable() {
         });
 
         // Inject the whole content string into our existing HTML table
-        //lessonlist isimli elamanın tablosunun tbody(table body) kısmını doldurmaya yarayan jquery kodu.
         $('#lessonList table tbody').html(tableContent);
         jsonNumerator++;
         if(selector==1)
@@ -223,8 +221,7 @@ function addLesson (event) {
         }).done(function (response) {
             if(response.msg===''){
 
-                $('#addLesson fieldset form input').val();
-
+                    $('#addLesson fieldset form input').val();
                     $('#addLesson fieldset form input#inputsequenceNumber').val(''),
                     $('#addLesson fieldset form input#inputcourseCode').val(''),
                     $('#addLesson fieldset form input#inputcourseName').val(''),
