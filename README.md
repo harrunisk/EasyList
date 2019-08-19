@@ -1,6 +1,6 @@
 # One Page Lesson CRUD
 This application is built by using Nodejs, Express, MongoDB, Jade.
-![Work](https://raw.githubusercontent.com/harrunisk/EasyList/master/Image.png)
+![Work](https://raw.githubusercontent.com/harrunisk/EasyList/master/art/Image.png)
 
 # Installation
 Make sure you have Nodejs, npm and MongoDB.  
